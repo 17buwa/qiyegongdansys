@@ -61,6 +61,12 @@ const routes = [
         meta: { title: '操作日志', icon: 'Document', roles: ['ADMIN'] }
       },
       {
+        path: 'notices',
+        name: 'NoticeManage',
+        component: () => import('@/views/NoticeManage.vue'),
+        meta: { title: '公告管理', icon: 'Bell', roles: ['ADMIN'] }
+      },
+      {
         path: 'profile',
         name: 'Profile',
         component: () => import('@/views/Profile.vue'),
