@@ -60,3 +60,18 @@ export function roleLabel(r) {
 export function roleType(r) {
   return ROLE_CONFIG[r]?.type || 'info'
 }
+
+// 公告类型展示配置
+export const NOTICE_TYPE_CONFIG = {
+  SYSTEM: { label: '系统公告', type: 'danger' },
+  MAINTENANCE: { label: '维护通知', type: 'warning' },
+  RULES: { label: '制度规范', type: 'primary' },
+  OTHER: { label: '其他', type: 'info' }
+}
+
+export function noticeLabel(t) {
+  return NOTICE_TYPE_CONFIG[t]?.label || t
+}
+export function noticeType(t) {
+  return NOTICE_TYPE_CONFIG[t]?.type || 'info'
+}
