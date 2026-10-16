@@ -1,0 +1,15 @@
+$ProgressPreference='SilentlyContinue'
+function Get-Tok($u){ return (Invoke-RestMethod -Uri "http://localhost:8080/api/auth/login" -Method Post -ContentType "application/json" -Body (@{username=$u;password='123456'}|ConvertTo-Json -Compress) -TimeoutSec 8).data.token }
+$ad=Get-Tok 'admin'; $cu=Get-Tok 'user01'; $ag=Get-Tok 'agent01'
+function Test-Url($name,$t,$ep){ $c=(& curl.exe -s -o NUL -w "%{http_code}" -H "Authorization: Bearer $t" ("http://localhost:8080"+$ep)); "{0,-7} {1,-20} -> {2}" -f $name,$ep,$c }
+'=== admin ==='
+Test-Url 'admin' $ad '/api/users'
+Test-Url 'admin' $ad '/api/roles'
+Test-Url 'admin' $ad '/api/debug/admin'
+'=== customer ==='
+Test-Url 'cust' $cu '/api/users'
+Test-Url 'cust' $cu '/api/roles'
+Test-Url 'cust' $cu '/api/debug/admin'
+'=== agent ==='
+Test-Url 'agent' $ag '/api/tickets'
+Test-Url 'agent' $ag '/api/users'
